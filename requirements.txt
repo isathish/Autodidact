@@ -1,0 +1,29 @@
+# Core dependencies for Project Autodidact
+
+# Machine Learning
+torch
+torchvision
+torchaudio
+
+# Browser automation
+playwright
+selenium
+
+# Databases
+chromadb
+neo4j
+
+# Data processing
+numpy
+pandas
+scikit-learn
+
+# Graph processing
+networkx
+
+# Utilities
+tqdm
+loguru
+
+# Testing
+pytest

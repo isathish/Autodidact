@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Autodidact UI</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        .section { margin-bottom: 20px; }
+        input, button { padding: 8px; margin-top: 5px; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Project Autodidact Control Panel</h1>
+
+    <div class="section">
+        <h2>Agent Status</h2>
+        <button onclick="getStatus()">Refresh Status</button>
+        <pre id="statusOutput">Loading...</pre>
+    </div>
+
+    <div class="section">
+        <h2>Send Goal</h2>
+        <input type="text" id="goalInput" placeholder="Enter a goal">
+        <button onclick="sendGoal()">Send</button>
+        <pre id="goalResponse"></pre>
+    </div>
+
+    <div class="section">
+        <h2>Knowledge Graph</h2>
+        <button onclick="getKnowledge()">Get Knowledge</button>
+        <pre id="knowledgeOutput"></pre>
+    </div>
+
+    <script>
+        const API_BASE = "http://localhost:8000";
+
+        async function getStatus() {
+            const res = await fetch(`${API_BASE}/status`);
+            const data = await res.json();
+            document.getElementById("statusOutput").textContent = JSON.stringify(data, null, 2);
+        }
+
+        async function sendGoal() {
+            const goal = document.getElementById("goalInput").value;
+            const res = await fetch(`${API_BASE}/send_goal`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ goal })
+            });
+            const data = await res.json();
+            document.getElementById("goalResponse").textContent = JSON.stringify(data, null, 2);
+        }
+
+        async function getKnowledge() {
+            const res = await fetch(`${API_BASE}/get_knowledge`);
+            const data = await res.json();
+            document.getElementById("knowledgeOutput").textContent = JSON.stringify(data, null, 2);
+        }
+
+        getStatus();
+    </script>
+</body>
+</html>

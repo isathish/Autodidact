@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: autodidact-agent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: autodidact
+  template:
+    metadata:
+      labels:
+        app: autodidact
+    spec:
+      containers:
+      - name: autodidact
+        image: autodidact:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+        volumeMounts:
+        - name: agent-data
+          mountPath: /app/data
+      volumes:
+      - name: agent-data
+        persistentVolumeClaim:
+          claimName: agent-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: autodidact-service
+spec:
+  selector:
+    app: autodidact
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8000
+  type: ClusterIP
