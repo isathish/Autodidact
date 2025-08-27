@@ -1,140 +1,124 @@
-# Project Autodidact
+# Autodidact Documentation
 
-**Autonomous Self-Improving AI Agent Framework**
-
----
-
-## **Overview**
-Project Autodidact is a multi-phase research and engineering initiative to build an autonomous AI agent capable of perceiving, acting, reasoning, and improving itself over time. The system integrates perception, motor control, reinforcement learning, semantic understanding, world modeling, grounding, and meta-learning into a unified architecture.
-
-The project is implemented in Python, with modular components for each subsystem, containerized deployment, and a Kubernetes-ready infrastructure.
+This documentation provides a detailed overview of the Autodidact project, its modules, and their functionalities.
 
 ---
 
-## **Key Features**
-- **Multi-Modal Perception**: CNN for visual input, GNN for DOM structure, and cross-attention fusion.
-- **Motor Control**: Browser automation and action primitives.
-- **Reinforcement Learning**: PPO and Evolution Strategies for adaptive behavior.
-- **Semantic Understanding**: Online clustering, token discovery, and predictive modeling.
-- **World Modeling**: Recurrent State-Space Models for environment prediction.
-- **Grounding**: Cross-modal contrastive learning and knowledge graph population.
-- **Meta-Learning**: Goal generation, algorithm tuning, and self-improvement loops.
-- **Scalable Deployment**: Dockerized environment with Kubernetes manifests.
+## Table of Contents
+1. [Overview](#overview)
+2. [Project Structure](#project-structure)
+3. [Modules](#modules)
+    - [Concepts](#concepts)
+    - [Core](#core)
+    - [Deploy](#deploy)
+    - [Goals](#goals)
+    - [Grounding](#grounding)
+    - [Language](#language)
+    - [Memory](#memory)
+    - [Meta](#meta)
+    - [Motor](#motor)
+    - [Perception](#perception)
+    - [RL](#rl)
+    - [Training](#training)
+    - [UI](#ui)
+    - [Utils](#utils)
+    - [World Model](#world-model)
+4. [Testing](#testing)
+5. [Contributing](#contributing)
+6. [License](#license)
 
 ---
 
-## **Implementation Roadmap**
-The project follows a phased roadmap:
-
-### **Phase 0: Foundation & Setup (Weeks 1–4)**
-- Define reward functions
-- Set up Python project structure
-- Configure Docker sandbox with browser automation
-- Integrate ChromaDB and Neo4j
-- Curate "Nursery" environment websites
-
-### **Phase 1: Low-Level Perception & Action (Months 2–4)**
-- Implement CNN & GNN encoders
-- Build motor control API
-- Integrate RL loop
-- First learning loop with change detection reward
-
-### **Phase 2: Semantics & World Model (Months 5–10)**
-- Online clustering for concept formation
-- Predictive world model (RSSM/Transformer)
-- Token discovery and next-character prediction
-
-### **Phase 3: Grounding & Knowledge Graph (Months 11–18)**
-- Cross-modal grounding
-- Populate Neo4j with grounded concepts
-- Learn relationships from text and actions
-
-### **Phase 4: Meta-Learning & Self-Improvement (Months 19+)**
-- Goal generation
-- Meta-learning for algorithm tuning
-- Self-improvement loop integration
-
-For detailed milestones and modules, see [IMPLEMENTATION_ROADMAP.md](IMPLEMENTATION_ROADMAP.md).
+## Overview
+Autodidact is an AI research framework designed for autonomous learning agents. It integrates perception, memory, language, motor control, and reinforcement learning to create self-improving systems.
 
 ---
 
-## **Project Structure**
+## Project Structure
+The project is organized into modular directories, each responsible for a specific aspect of the system.
+
 ```
-core/           # Core logic and configuration
-perception/     # Vision and DOM perception modules
-motor/          # Action primitives and control
-rl/             # Reinforcement learning agents
-concepts/       # Concept formation and clustering
-world_model/    # Predictive modeling
-language/       # Tokenization and language models
-grounding/      # Cross-modal grounding
-memory/         # Vector store, graph store, and relationship extraction
-goals/          # Goal generation
+concepts/       # High-level AI concepts and algorithms
+core/           # Core reward mechanisms and utilities
+deploy/         # Deployment configurations (Kubernetes, Docker)
+goals/          # Goal generation and management
+grounding/      # Grounding of concepts in sensory data
+language/       # Language models and tokenizers
+memory/         # Memory graph building and relationship extraction
 meta/           # Meta-learning and optimization
-training/       # Training loops
-ui/             # Frontend and backend interfaces
-deploy/         # Deployment scripts and manifests
+motor/          # Motor control and action execution
+perception/     # Perception models (vision, DOM graph)
+rl/             # Reinforcement learning agents
 tests/          # Unit and integration tests
+training/       # Training loops and self-improvement
+ui/             # User interface (frontend & backend)
+utils/          # Utility functions
+world_model/    # World modeling and state prediction
 ```
 
 ---
 
-## **Installation**
-### **Prerequisites**
-- Python 3.10+
-- Docker & Docker Compose
-- Kubernetes (optional, for cluster deployment)
-- Neo4j & ChromaDB instances
+## Modules
 
-### **Setup**
+### Concepts
+Located in `concepts/`, this module contains algorithms for clustering and other conceptual reasoning tasks.
+
+### Core
+Located in `core/`, this module defines reward functions and core logic for agent evaluation.
+
+### Deploy
+Located in `deploy/`, this module contains deployment configurations for Kubernetes and Docker.
+
+### Goals
+Located in `goals/`, this module handles goal generation and prioritization.
+
+### Grounding
+Located in `grounding/`, this module maps abstract concepts to sensory data.
+
+### Language
+Located in `language/`, this module includes character-level models and tokenizers.
+
+### Memory
+Located in `memory/`, this module builds memory graphs and extracts relationships.
+
+### Meta
+Located in `meta/`, this module implements meta-learning and optimization strategies.
+
+### Motor
+Located in `motor/`, this module controls agent actions and motor outputs.
+
+### Perception
+Located in `perception/`, this module processes visual and DOM-based sensory input.
+
+### RL
+Located in `rl/`, this module implements reinforcement learning agents such as PPO.
+
+### Training
+Located in `training/`, this module contains training loops and self-improvement routines.
+
+### UI
+Located in `ui/`, this module provides backend and frontend interfaces for interacting with the system.
+
+### Utils
+Located in `utils/`, this module contains helper functions and utilities.
+
+### World Model
+Located in `world_model/`, this module predicts future states and models the environment.
+
+---
+
+## Testing
+Tests are located in the `tests/` directory. Run them using:
 ```bash
-# Clone repository
-git clone https://github.com/yourusername/project-autodidact.git
-cd project-autodidact
-
-# Install dependencies
-pip install -r requirements.txt
-
-# (Optional) Build Docker image
-docker build -t autodidact:latest -f deploy/k8s/dockerfile .
+pytest
 ```
 
 ---
 
-## **Usage**
-### **Local Development**
-```bash
-python training/loop_phase1.py
-```
-
-### **Docker**
-```bash
-docker run -it autodidact:latest
-```
-
-### **Kubernetes**
-```bash
-kubectl apply -f deploy/k8s/deployment.yaml
-```
+## Contributing
+Contributions are welcome! Please fork the repository, create a feature branch, and submit a pull request.
 
 ---
 
-## **Contributing**
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature-name`)
-3. Commit changes (`git commit -m "Description"`)
-4. Push to branch (`git push origin feature-name`)
-5. Open a Pull Request
-
----
-
-## **License**
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## **Acknowledgements**
-- OpenAI Gym for RL environment inspiration
-- PyTorch for deep learning framework
-- Neo4j for graph database
-- ChromaDB for vector storage
+## License
+This project is licensed under the terms of the LICENSE file in the root directory.
